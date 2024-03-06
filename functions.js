@@ -100,9 +100,10 @@ function revertToNumber(string, locale) {
 /* Determines the number of working (business) days between two supplied dates */
 	
 function getWorkingDays(startDate, endDate) {
+   
+   var start = new Date(startDate.replace(/-/g, '\/'));
+   var end = new Date(endDate.replace(/-/g, '\/'));
 
-   var start = new Date(Date.parse(startDate));
-	var end   = new Date(Date.parse(endDate));			
 	var result = 0;
 
 	while (start <= end) {
@@ -174,11 +175,12 @@ function addRow() {
       document.getElementById(enddatePrevID).value = "";
       
    } else {
-           
-      var newDate = new Date(enddatePrev);
-      var newDate2 = new Date(newDate.setDate(newDate.getDate() + 2));
       
-      startdateToUse = newDate2.toLocaleDateString();
+      var endDate = new Date(enddatePrev.replace(/-/g, '\/'));
+      endDate.setDate(endDate.getDate() + 1);    
+      newDate = endDate.toISOString().slice(0,10).replace(/-/g, "-");
+
+      startdateToUse = newDate;
       enddateToUse = retrodate;
       
    }
