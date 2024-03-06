@@ -1,0 +1,49 @@
+
+/* Setting small margin above and below tables and buttons */
+table {margin-top: 20px;}
+button {margin-top: 20px;}
+
+/* Aligning text input */
+input {text-align:center}
+    
+/* Standard table formatting */
+table, th, tr, td {
+	border: 1px solid black;
+   border-collapse: collapse;
+   text-align: center;
+}
+
+/* These are formatted as tables for formatting */
+/* purposes so we want different styling	      */
+table.inputTableClass, 
+table.inputTableClass th, 
+table.inputTableClass tr, 
+table.inputTableClass td,
+table.grandTotalClass, 
+table.grandTotalClass th, 
+table.grandTotalClass tr, 
+table.grandTotalClass td {
+   border: 0px solid black;
+   text-align: left;
+}
+
+/* Right-aligning grand total in results table */
+table.grandTotalClass td:nth-child(2) {text-align: right;}
+
+/* Adding dollar sign where applicable */
+table.salaryTableClass td:nth-child(8)::before {
+   content:"$";
+}
+table.grandTotalClass td:nth-child(2)::before {
+	content:"$";
+}
+table.resultsTableClass td:nth-child(2)::before, 
+table.resultsTableClass td:nth-child(5)::before, 
+table.resultsTableClass td:nth-child(6)::before,
+table.resultsTableClass td:nth-child(8)::before, 
+table.resultsTableClass td:nth-child(9)::before,
+table.resultsTableClass td:nth-child(11)::before, 
+table.resultsTableClass td:nth-child(12)::before,
+table.resultsTableClass td:nth-child(13)::before {
+	content:"$";
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+ 
+<html> 
+
+  <head> 
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+	
+  <body> 
+  
+		<h style="font-size: 24px;">
+			<b>Unofficial MA (Estimated) Retroactive Payment Calculator</b> 
+      </h>
+      
+		<p style="font-size: 20px;">
+         This tool can be used to calculate an estimate of the retroactive pay you may receive as a result of the signing of a new collective 
+         agreement on March 1st, 2024, <br>
+			covering a period starting on October 1st, 2022 until the date that pay rate updates are expected to be effective in the pay system.
+		</p>
+																
+		<p style="font-size: 18px; color:red;"> 
+         <b> NOTE: This is not an official tool and is not affiliated with either PIPSC or the Government of Canada. 
+         Results may not reflect the actual amount of retroactive pay you will receive, due to information unique 
+         to your pay situation that isn't accounted for in this program,and potential errors in the program itself. </b> 
+      </p> 
+																							 														 
+		<p style="font-size: 18px;">
+         To use this tool, enter all applicable periods of employment and their associated dates, weekly hours, position and step. <br>
+			If you would like to reflect multiple periods of employment at different levels, click "Add another period of pay to the table". <br>
+			You may adjust the date that payments are calculated to be retroactive to based on estimates of when pay rate updates are expected 
+			to be effective in the pay system.<br>
+			Periods of LWOP are not currently able to be be incorporated into this calculator. If you would like to reflect periods of LWOP, enter two 
+         (or more) periods of  mployment with the end date of initial periods being on the day before your LWOP, and the start dates being on the day 
+         following your LWOP.
+		</p>
+                            
+		<p style="font-size: 18px;">
+         <b> When you have entered all applicable information and have verified it is correct, click "CALCULATE" </b>
+      </p>                            
+
+		<table id="inputTable" class="inputTableClass">
+			<tr>
+				<td> <b> Calculate Payments Retroactive to: </td>
+				<td > <input type="date" id="retrodate" name="retrodate"> </td>
+			</tr>
+		</table>
+
+		<table id="salaryTable" class="salaryTableClass" style="width:55%">
+			<thead>
+				<tr>
+					<th style="width:07%">Period</th>
+					<th style="width:12%">Start Date</th>
+					<th style="width:12%">End Date</th>
+					<th style="width:19%">Assigned Weekly Hours</th>
+					<th style="width:19%">Standard Weekly Hours</th>
+					<th style="width:13">Position</th>
+					<th style="width:07%">Step</th>
+					<th style="width:13%">Previous Salary</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td> <b> 1 </td>
+					<td> <input type="date" id="startdate1" name="startdate" readonly="readonly"> </td>
+					<td> <input type="date" id="enddate1" name="enddate"> </td>
+					<td> <input id="awh1" name="awh" value=37.5> </td>
+					<td> <input id="swh1" name="swh" value=37.5> </td>	
+					<td> 
+						<select id="position1" name="position" onchange="updateSteps(this)">
+							<option value="ma2">MA-2</option>
+							<option value="ma3">MA-3</option>
+							<option value="ma4">MA-4</option>
+							<option value="ma5">MA-5</option>
+							<option value="ma6">MA-6</option>
+							<option value="ma7">MA-7</option> 
+					</td>
+					<td>
+						<select id="step1" name="step" onchange="updateSalary(this)">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+					</td>	
+					<td id="salary1" style="text-align: center;">60832</td>
+				</tr>	
+			</tbody>
+		</table>
+
+		<button type="button" onclick="addRow()">Add another period of pay to the table </button>
+		<button type="button" onclick="removeRow()">Remove last period of pay in the table </button> <br>
+		<button type="button" onclick="calculate()" style="width:100px; height:30px; text-align: center; text-align: middle;"> <b> CALCULATE </b> </button>
+
+		 <table id="grandTotal" class="grandTotalClass" style="display:none; width:50%">
+			<tr>
+				<td style="width:80%; font-size: 20px;"> <b> Total Estimated Retroactive Payment for all Periods: </td>
+				<td style="width:20%; font-size: 20px;" id="grandTotalPay"></td>
+			</tr>
+		</table>
+
+		<table id="resultsTable" class="resultsTableClass" style="display:none; width:70%;">
+			<thead>
+				<tr>
+					<th style="width:04%" rowspan="3">User Input</th>
+					<th style="width:08%" rowspan="3">Salary</th>
+					<th style="width:05%" rowspan="3">Working Days</th>
+					<th style="width:25%" colspan="3">Agreement Period 1</th>
+					<th style="width:25%" colspan="3">Agreement Period 2</th>
+					<th style="width:25%" colspan="3">Agreement Period 3</th>
+					<th style="width:08%" rowspan="3">TOTAL</th>
+				</tr>
+				<tr>
+					<th colspan="3">(2022-10-01 to 2023-09-30)</th>
+					<th colspan="3">(2023-10-01 to 2024-09-30)</th>
+					<th colspan="3">(2024-10-01 to 2025-09-30)</th>
+				</tr>
+				<tr>
+					<th>Days Worked</th>
+					<!-- <th>LWOP Days</th> -->
+					<th>New Salary</th>
+					<th>Difference</th>
+					<th>Days Worked</th>
+					<!-- <th>LWOP Days</th> -->
+					<th>New Salary</th>
+					<th>Difference</th>
+					<th>Days Worked</th>
+					<!-- <th>LWOP Days</th> -->
+					<th>New Salary</th>
+					<th>Difference</th>
+				</tr>
+			</thead>
+         <tbody>
+         </tbody>
+		</table>
+	
+      <script type="text/javascript" src="functions.js"></script>
+	
+  </body> 
+	
+</html> 
